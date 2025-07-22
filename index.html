@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <title>etheere4l</title>
+    <link rel="stylesheet" href="estilo.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
+    <style>
+        /* Estilos para la pantalla de acceso */
+        
+        .pantalla-acceso {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .pantalla-acceso img {
+            width: 200px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 10px #fff);
+        }
+        
+        .pantalla-acceso input {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            outline: none;
+            background-color: #222;
+            color: white;
+            width: 200px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        
+        .pantalla-acceso button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .pantalla-acceso p {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        /* Estilos Lightbox personalizados */
+        
+        .lb-nav a.lb-prev,
+        .lb-nav a.lb-next {
+            opacity: 1 !important;
+        }
+        
+        .lb-data .lb-close {
+            display: block !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Pantalla de acceso -->
+    <div class="pantalla-acceso" id="acceso">
+        <img src="images/logo.png" alt="etheere4l Logo" />
+        <input type="password" id="clave" placeholder="Contraseña" />
+        <button onclick="validar()">Entrar</button>
+        <p id="mensaje"></p>
+    </div>
+
+    <!-- Contenido principal -->
+    <a href="#seccion2">
+        <section class="portada">
+            <img src="images/logo.png" alt="Portada" class="imagen-portada" />
+        </section>
+    </a>
+
+    <section id="seccion2" class="stock-section">
+        <img src="images/stock.jpg" alt="Fondo Stock" class="fondo-stock" />
+
+        <div class="contenedor-stock">
+
+            <!-- Producto 1: Pulsera CH #1 -->
+            <div class="producto">
+                <div class="carrusel">
+                    <div class="imagen-activa">
+                        <a href="pls.2png.png" data-lightbox="pulsera-1" data-title="Pulsera CH modelo #1">
+                            <img src="pls.2png.png" alt="Pulsera CH">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="pls3.png" data-lightbox="pulsera-1" data-title="Vista lateral">
+                            <img src="pls3.png" alt="Vista lateral">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="pls4.png" data-lightbox="pulsera-1" data-title="Detalle de cierre">
+                            <img src="pls4.png" alt="Detalle de cierre">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="pulsera.png" data-lightbox="pulsera-1" data-title="Sobre piel">
+                            <img src="pulsera.png" alt="Sobre piel">
+                        </a>
+                    </div>
+                    <button type="button" class="flecha izquierda" onclick="manejarFlecha(event)">&#10094;</button>
+                    <button type="button" class="flecha derecha" onclick="manejarFlecha(event)">&#10095;</button>
+                </div>
+                <h2>Pulsera CH (modelo #1)</h2>
+                <p>$750 MXN</p>
+                <p>Medida: 18 cm</p>
+            </div>
+
+            <!-- Producto 2: Pulsera CH #2 -->
+            <div class="producto">
+                <div class="carrusel">
+                    <div class="imagen-activa">
+                        <a href="plsra.png" data-lightbox="pulsera-2" data-title="Pulsera CH modelo #2">
+                            <img src="plsra.png" alt="Pulsera CH">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="plsra1.png" data-lightbox="pulsera-2" data-title="Vista alternativa">
+                            <img src="plsra1.png" alt="Vista alternativa">
+                        </a>
+                    </div>
+                    <button type="button" class="flecha izquierda" onclick="manejarFlecha(event)">&#10094;</button>
+                    <button type="button" class="flecha derecha" onclick="manejarFlecha(event)">&#10095;</button>
+                </div>
+                <h2>Pulsera CH (modelo #2)</h2>
+                <p>$750 MXN</p>
+                <p>Medida: 18 cm</p>
+            </div>
+
+            <!-- Producto 3: Lentes CH #1 -->
+            <div class="producto">
+                <div class="carrusel">
+                    <div class="imagen-activa">
+                        <a href="lentesch1.png" data-lightbox="lentes-1" data-title="Lentes CH modelo #1">
+                            <img src="lentesch1.png" alt="Lentes CH">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="lentesch2.png" data-lightbox="lentes-1" data-title="Vista lateral">
+                            <img src="lentesch2.png" alt="Vista lateral">
+                        </a>
+                    </div>
+                    <button type="button" class="flecha izquierda" onclick="manejarFlecha(event)">&#10094;</button>
+                    <button type="button" class="flecha derecha" onclick="manejarFlecha(event)">&#10095;</button>
+                </div>
+                <h2>Lentes CH (modelo #1)</h2>
+                <p>$1200 MXN</p>
+                <p>Talla única</p>
+            </div>
+
+            <!-- Producto 4: Lentes CH #2 -->
+            <div class="producto">
+                <div class="carrusel">
+                    <div class="imagen-activa">
+                        <a href="lnts.png" data-lightbox="lentes-2" data-title="Lentes CH modelo #2">
+                            <img src="lnts.png" alt="Lentes CH">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="lentesch2.png" data-lightbox="lentes-2" data-title="Vista lateral">
+                            <img src="lentesch2.png" alt="Vista lateral">
+                        </a>
+                    </div>
+                    <button type="button" class="flecha izquierda" onclick="manejarFlecha(event)">&#10094;</button>
+                    <button type="button" class="flecha derecha" onclick="manejarFlecha(event)">&#10095;</button>
+                </div>
+                <h2>Lentes CH (modelo #2)</h2>
+                <p>$1200 MXN</p>
+                <p>Talla única</p>
+            </div>
+
+            <!-- Producto 5: Lentes CH #3 -->
+            <div class="producto">
+                <div class="carrusel">
+                    <div class="imagen-activa">
+                        <a href="lnts.png" data-lightbox="lentes-3" data-title="Lentes CH modelo #3">
+                            <img src="lnts.png" alt="Lentes CH">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="lentesch2.png" data-lightbox="lentes-3" data-title="Vista lateral">
+                            <img src="lentesch2.png" alt="Vista lateral">
+                        </a>
+                    </div>
+                    <button type="button" class="flecha izquierda" onclick="manejarFlecha(event)">&#10094;</button>
+                    <button type="button" class="flecha derecha" onclick="manejarFlecha(event)">&#10095;</button>
+                </div>
+                <h2>Lentes CH (modelo #3)</h2>
+                <p>$1200 MXN</p>
+                <p>Talla única</p>
+            </div>
+
+            <!-- Producto 6: Cadena CH #1 -->
+            <div class="producto">
+                <div class="carrusel">
+                    <div class="imagen-activa">
+                        <a href="cdnas1.png" data-lightbox="cadena-1" data-title="Cadena CH modelo #1">
+                            <img src="cdnas1.png" alt="Cadena CH">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="cdns.png.jpg" data-lightbox="cadena-1" data-title="Detalle del cierre">
+                            <img src="cdns.png.jpg" alt="Detalle del cierre">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="cdns1.png.jpg" data-lightbox="cadena-1" data-title="Sobre prenda">
+                            <img src="cdns1.png.jpg" alt="Sobre prenda">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="cdns21.png" data-lightbox="cadena-1" data-title="Empaque">
+                            <img src="cdns21.png" alt="Empaque">
+                        </a>
+                    </div>
+                    <button type="button" class="flecha izquierda" onclick="manejarFlecha(event)">&#10094;</button>
+                    <button type="button" class="flecha derecha" onclick="manejarFlecha(event)">&#10095;</button>
+                </div>
+                <h2>Cadena CH (modelo #1)</h2>
+                <p>$980 MXN</p>
+                <p>Medida: 55 cm</p>
+            </div>
+
+            <!-- Producto 7: Cadena CH #2 -->
+            <div class="producto">
+                <div class="carrusel">
+                    <div class="imagen-activa">
+                        <a href="cdns.4.png" data-lightbox="cadena-2" data-title="Cadena CH modelo #2">
+                            <img src="cdns.4.png" alt="Cadena CH">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="cdns.png" data-lightbox="cadena-2" data-title="Vista cercana">
+                            <img src="cdns.png" alt="Vista cercana">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="cdns1.png" data-lightbox="cadena-2" data-title="Detalle de eslabones">
+                            <img src="cdns1.png" alt="Detalle de eslabones">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="cdns2.png" data-lightbox="cadena-2" data-title="Sobre cuello">
+                            <img src="cdns2.png" alt="Sobre cuello">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="cdns3.png" data-lightbox="cadena-2" data-title="Empaque premium">
+                            <img src="cdns3.png" alt="Empaque premium">
+                        </a>
+                    </div>
+                    <button type="button" class="flecha izquierda" onclick="manejarFlecha(event)">&#10094;</button>
+                    <button type="button" class="flecha derecha" onclick="manejarFlecha(event)">&#10095;</button>
+                </div>
+                <h2>Cadena CH (modelo #2)</h2>
+                <p>$980 MXN</p>
+                <p>Medida: 55 cm</p>
+            </div>
+
+            <!-- Producto 8: Anillo CH #1 -->
+            <div class="producto">
+                <div class="carrusel">
+                    <div class="imagen-activa">
+                        <a href="anillos.png" data-lightbox="anillo-1" data-title="Anillo CH modelo #1">
+                            <img src="anillos.png" alt="Anillo CH">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="anillos1.png" data-lightbox="anillo-1" data-title="Vista lateral">
+                            <img src="anillos1.png" alt="Vista lateral">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="anillos2.png" data-lightbox="anillo-1" data-title="Detalle de tallado">
+                            <img src="anillos2.png" alt="Detalle de tallado">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="anillos3.png" data-lightbox="anillo-1" data-title="Sobre mano">
+                            <img src="anillos3.png" alt="Sobre mano">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="anillos4.png" data-lightbox="anillo-1" data-title="Estuche">
+                            <img src="anillos4.png" alt="Estuche">
+                        </a>
+                    </div>
+                    <button type="button" class="flecha izquierda" onclick="manejarFlecha(event)">&#10094;</button>
+                    <button type="button" class="flecha derecha" onclick="manejarFlecha(event)">&#10095;</button>
+                </div>
+                <h2>Anillo CH (modelo #1)</h2>
+                <p>$670 MXN</p>
+                <p>Talla: 7 US</p>
+            </div>
+
+            <!-- Producto 9: Anillo CH #2 -->
+            <div class="producto">
+                <div class="carrusel">
+                    <div class="imagen-activa">
+                        <a href="anlls.png" data-lightbox="anillo-2" data-title="Anillo CH modelo #2">
+                            <img src="anlls.png" alt="Anillo CH">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="anlls1.png" data-lightbox="anillo-2" data-title="Vista superior">
+                            <img src="anlls1.png" alt="Vista superior">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="anlls2.png" data-lightbox="anillo-2" data-title="Detalle de textura">
+                            <img src="anlls2.png" alt="Detalle de textura">
+                        </a>
+                    </div>
+                    <div class="imagen">
+                        <a href="anlls3.png" data-lightbox="anillo-2" data-title="Sobre dedo">
+                            <img src="anlls3.png" alt="Sobre dedo">
+                        </a>
+                    </div>
+                    <button type="button" class="flecha izquierda" onclick="manejarFlecha(event)">&#10094;</button>
+                    <button type="button" class="flecha derecha" onclick="manejarFlecha(event)">&#10095;</button>
+                </div>
+                <h2>Anillo CH (modelo #2)</h2>
+                <p>$690 MXN</p>
+                <p>Talla: 8 US</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <script>
+        // 1. Configuración Lightbox
+        lightbox.option({
+            resizeDuration: 200,
+            wrapAround: true,
+            fadeDuration: 200,
+            imageFadeDuration: 200,
+            disableScrolling: true,
+            albumLabel: "Imagen %1 de %2",
+            alwaysShowNavOnTouchDevices: true
+        });
+
+        // 2. Validación de acceso
+        function validar() {
+            const clave = document.getElementById("clave").value.toUpperCase();
+            const acceso = document.getElementById("acceso");
+            const mensaje = document.getElementById("mensaje");
+
+            if (clave === "ETHERE4LYFE") {
+                acceso.style.display = "none";
+                document.body.style.overflow = "auto";
+            } else {
+                mensaje.textContent = "Contraseña incorrecta.";
+            }
+        }
+
+        // 3. Función para flechas (¡NUEVO Y MEJORADO!)
+        function manejarFlecha(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const flecha = event.currentTarget;
+            const carrusel = flecha.closest('.carrusel');
+            const imagenes = carrusel.querySelectorAll('.imagen');
+            let currentIndex = Array.from(imagenes).findIndex(img => img.classList.contains('imagen-activa'));
+
+            imagenes[currentIndex].classList.remove('imagen-activa');
+            currentIndex = flecha.classList.contains('izquierda') ?
+                (currentIndex - 1 + imagenes.length) % imagenes.length :
+                (currentIndex + 1) % imagenes.length;
+            imagenes[currentIndex].classList.add('imagen-activa');
+
+            // Reiniciar autoplay al interactuar manualmente
+            clearInterval(carrusel.dataset.intervalo);
+        }
+
+        // 4. Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.overflow = "hidden";
+
+            // Navegación entre secciones
+            const lyfeButton = document.getElementById('lyfe-button');
+            const backButton = document.getElementById('back-button');
+            const mainSection = document.getElementById('main-section');
+            const secondarySection = document.getElementById('secondary-section');
+
+            if (lyfeButton && backButton) {
+                lyfeButton.addEventListener('click', function() {
+                    mainSection.classList.add('hidden');
+                    secondarySection.classList.remove('hidden');
+                });
+
+                backButton.addEventListener('click', function() {
+                    secondarySection.classList.add('hidden');
+                    mainSection.classList.remove('hidden');
+                });
+            }
+
+            // Carrusel con autoplay mejorado
+            document.querySelectorAll('.carrusel').forEach(carrusel => {
+                const imagenes = carrusel.querySelectorAll('.imagen');
+                if (imagenes.length === 0) return;
+
+                imagenes[0].classList.add('imagen-activa');
+
+                // Autoplay con control mejorado
+                carrusel.dataset.intervalo = setInterval(() => {
+                    const current = [...imagenes].findIndex(img => img.classList.contains('imagen-activa'));
+                    imagenes[current].classList.remove('imagen-activa');
+                    const next = (current + 1) % imagenes.length;
+                    imagenes[next].classList.add('imagen-activa');
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+
+</html>
