@@ -1,113 +1,85 @@
-document.addEventListener('DOMContentLoaded', function () {
-  // Acceso
-  const claveInput = document.getElementById("clave");
-  const acceso = document.getElementById("acceso");
-  const mensaje = document.getElementById("mensaje");
+document.addEventListener('DOMContentLoaded', function() {
+    const lyfeButton = document.getElementById('lyfe-button');
+    const backButton = document.getElementById('back-button');
+    const mainSection = document.getElementById('main-section');
+    const secondarySection = document.getElementById('secondary-section');
 
-  window.validar = function () {
-    const clave = claveInput.value.toUpperCase();
-    if (clave === "ETHERE4LYFE") {
-      acceso.style.display = "none";
-    } else {
-      mensaje.textContent = "Contraseña incorrecta.";
-    }
-  };
+    // Ir a sección secundaria
+    lyfeButton.addEventListener('click', function() {
+        mainSection.classList.add('hidden');
+        secondarySection.classList.remove('hidden');
+    });
 
-  // Productos
-  const productos = Array.from(document.querySelectorAll('.producto')).map(productoEl => {
-    const id = productoEl.dataset.productoId;
-    const titulo = productoEl.querySelector('h2').textContent;
-    const precio = productoEl.querySelectorAll('p')[0].textContent;
-    const descripcion = productoEl.querySelectorAll('p')[1]?.textContent || '';
-    const imagenes = Array.from(productoEl.querySelectorAll('.carrusel img')).map(img => img.getAttribute('src'));
-    return { id, titulo, precio, descripcion, imagenes };
-  });
+    // Volver a sección principal
+    backButton.addEventListener('click', function() {
+        secondarySection.classList.add('hidden');
+        mainSection.classList.remove('hidden');
 
-  // Modal elementos
+      document.addEventListener('DOMContentLoaded', function () {
+  const productos = document.querySelectorAll('.producto');
   const modal = document.getElementById('modalProducto');
-  const cerrarModal = document.getElementById('cerrarModal');
-  const imagenActiva = document.getElementById('imagenActiva');
-  const tituloEl = document.getElementById('modalTitulo');
-  const precioEl = document.getElementById('modalPrecio');
-  const descripcionEl = document.getElementById('modalDescripcion');
-  const relacionadosContenedor = document.getElementById('relacionadosContenedor');
-  const btnAnterior = document.getElementById('btnAnterior');
-  const btnSiguiente = document.getElementById('btnSiguiente');
+  const cerrar = document.querySelector('.cerrar-modal');
+  const imagenPrincipal = document.getElementById('imagenPrincipal');
+  const titulo = document.getElementById('tituloProducto');
+  const precio = document.getElementById('precioProducto');
+  const descripcion = document.getElementById('descripcionProducto');
+  const contenedorRelacionados = document.getElementById('contenedorRelacionados');
+  const flechaIzq = document.getElementById('flechaIzquierda');
+  const flechaDer = document.getElementById('flechaDerecha');
 
-  let productoActual = null;
-  let imagenActualIndex = 0;
+  let indiceActual = 0;
+  let productosArray = [];
 
-  // Mostrar modal
-  function abrirModal(productoId) {
-    const producto = productos.find(p => p.id === productoId);
-    if (!producto) return;
+  productos.forEach((producto, i) => {
+    productosArray.push(producto);
 
-    productoActual = producto;
-    imagenActualIndex = 0;
-
-    // Actualizar contenido
-    actualizarModal();
-
-    modal.classList.remove('oculto');
-    document.body.style.overflow = 'hidden';
-  }
-
-  // Cerrar modal
-  cerrarModal.addEventListener('click', () => {
-    modal.classList.add('oculto');
-    document.body.style.overflow = '';
+    producto.addEventListener('click', () => {
+      mostrarProducto(i);
+    });
   });
 
-  // Navegar entre imágenes
-  btnAnterior.addEventListener('click', () => {
-    if (!productoActual) return;
-    imagenActualIndex = (imagenActualIndex - 1 + productoActual.imagenes.length) % productoActual.imagenes.length;
-    actualizarImagen();
-  });
+  function mostrarProducto(indice) {
+    indiceActual = indice;
+    const producto = productosArray[indice];
+    const img = producto.querySelector('.carrusel img');
+    const tituloTexto = producto.querySelector('h2').textContent;
+    const precioTexto = producto.querySelectorAll('p')[0].textContent;
+    const descTexto = producto.querySelectorAll('p')[1]?.textContent || '';
 
-  btnSiguiente.addEventListener('click', () => {
-    if (!productoActual) return;
-    imagenActualIndex = (imagenActualIndex + 1) % productoActual.imagenes.length;
-    actualizarImagen();
-  });
-
-  // Cargar datos al modal
-  function actualizarModal() {
-    if (!productoActual) return;
-
-    // Imagen principal
-    actualizarImagen();
-
-    // Detalles
-    tituloEl.textContent = productoActual.titulo;
-    precioEl.textContent = productoActual.precio;
-    descripcionEl.textContent = productoActual.descripcion;
+    imagenPrincipal.src = img.src;
+    titulo.textContent = tituloTexto;
+    precio.textContent = precioTexto;
+    descripcion.textContent = descTexto;
 
     // Productos relacionados
-    relacionadosContenedor.innerHTML = '';
-
-    const relacionados = productos.filter(p => p.id !== productoActual.id).slice(0, 6); // Máx 6
-    relacionados.forEach(rel => {
-      const img = document.createElement('img');
-      img.src = rel.imagenes[0];
-      img.alt = rel.titulo;
-      img.title = rel.titulo;
-      img.addEventListener('click', () => abrirModal(rel.id));
-      relacionadosContenedor.appendChild(img);
+    contenedorRelacionados.innerHTML = '';
+    productosArray.forEach((p, idx) => {
+      if (idx !== indice) {
+        const imgRel = p.querySelector('.carrusel img');
+        const mini = document.createElement('img');
+        mini.src = imgRel.src;
+        mini.addEventListener('click', () => mostrarProducto(idx));
+        contenedorRelacionados.appendChild(mini);
+      }
     });
+
+    modal.classList.remove('oculto');
   }
 
-  function actualizarImagen() {
-    if (productoActual && productoActual.imagenes.length > 0) {
-      imagenActiva.src = productoActual.imagenes[imagenActualIndex];
-    }
-  }
-
-  // Evento para cada producto
-  document.querySelectorAll('.producto').forEach(producto => {
-    producto.addEventListener('click', () => {
-      const id = producto.dataset.productoId;
-      abrirModal(id);
-    });
+  cerrar.addEventListener('click', () => {
+    modal.classList.add('oculto');
   });
+
+  flechaIzq.addEventListener('click', () => {
+    let nuevo = (indiceActual - 1 + productosArray.length) % productosArray.length;
+    mostrarProducto(nuevo);
+  });
+
+  flechaDer.addEventListener('click', () => {
+    let nuevo = (indiceActual + 1) % productosArray.length;
+    mostrarProducto(nuevo);
+  });
+});
+
+    });
 });
